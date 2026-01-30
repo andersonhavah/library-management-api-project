@@ -55,8 +55,8 @@ app.get('/', (req, res) => {
     message: 'Welcome to Library Management API',
     version: '1.0.0',
     endpoints: {
-      books: '/api/books',
-      authors: '/api/authors'
+      books: '/books',
+      authors: '/authors'
     },
     documentation: '/api-docs'
   });
