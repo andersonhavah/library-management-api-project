@@ -24,8 +24,8 @@ app.use(cors());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 
 // Routes
-app.use('/api/books', require('./routes/bookRoutes'));
-app.use('/api/authors', require('./routes/authorRoutes'));
+app.use('/books', require('./routes/bookRoutes'));
+app.use('/authors', require('./routes/authorRoutes'));
 
 /**
  * @swagger
