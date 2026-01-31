@@ -3,7 +3,7 @@ const Author = require('../models/Author');
 const Book = require('../models/Book');
 
 // @desc    Get all authors
-// @route   GET /api/authors
+// @route   GET /authors
 // @access  Public
 const getAuthors = async (req, res) => {
   try {
@@ -24,7 +24,7 @@ const getAuthors = async (req, res) => {
 };
 
 // @desc    Get single author
-// @route   GET /api/authors/:id
+// @route   GET /authors/:id
 // @access  Public
 const getAuthor = async (req, res) => {
   try {
@@ -63,7 +63,7 @@ const getAuthor = async (req, res) => {
 };
 
 // @desc    Create new author
-// @route   POST /api/authors
+// @route   POST /authors
 // @access  Public
 const createAuthor = async (req, res) => {
   try {
@@ -106,7 +106,7 @@ const createAuthor = async (req, res) => {
 };
 
 // @desc    Update author
-// @route   PUT /api/authors/:id
+// @route   PUT /authors/:id
 // @access  Public
 const updateAuthor = async (req, res) => {
   try {
@@ -167,7 +167,7 @@ const updateAuthor = async (req, res) => {
 };
 
 // @desc    Delete author
-// @route   DELETE /api/authors/:id
+// @route   DELETE /authors/:id
 // @access  Public
 const deleteAuthor = async (req, res) => {
   try {

@@ -2,7 +2,7 @@ const { validationResult } = require('express-validator');
 const Book = require('../models/Book');
 
 // @desc    Get all books
-// @route   GET /api/books
+// @route   GET /books
 // @access  Public
 const getBooks = async (req, res) => {
   try {
@@ -23,7 +23,7 @@ const getBooks = async (req, res) => {
 };
 
 // @desc    Get single book
-// @route   GET /api/books/:id
+// @route   GET /books/:id
 // @access  Public
 const getBook = async (req, res) => {
   try {
@@ -56,7 +56,7 @@ const getBook = async (req, res) => {
 };
 
 // @desc    Create new book
-// @route   POST /api/books
+// @route   POST /books
 // @access  Public
 const createBook = async (req, res) => {
   try {
@@ -99,7 +99,7 @@ const createBook = async (req, res) => {
 };
 
 // @desc    Update book
-// @route   PUT /api/books/:id
+// @route   PUT /books/:id
 // @access  Public
 const updateBook = async (req, res) => {
   try {
@@ -160,7 +160,7 @@ const updateBook = async (req, res) => {
 };
 
 // @desc    Delete book
-// @route   DELETE /api/books/:id
+// @route   DELETE /books/:id
 // @access  Public
 const deleteBook = async (req, res) => {
   try {
