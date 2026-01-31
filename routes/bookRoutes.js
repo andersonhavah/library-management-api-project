@@ -14,7 +14,7 @@ const {
 
 /**
  * @swagger
- * /api/books:
+ * /books:
  *   get:
  *     summary: Get all books
  *     tags: [Books]
@@ -46,7 +46,7 @@ router.get('/', getBooks);
 
 /**
  * @swagger
- * /api/books:
+ * /books:
  *   post:
  *     summary: Create a new book
  *     tags: [Books]
@@ -144,7 +144,7 @@ router.post('/', bookValidationRules(), createBook);
 
 /**
  * @swagger
- * /api/books/{id}:
+ * /books/{id}:
  *   get:
  *     summary: Get a single book
  *     tags: [Books]
@@ -185,7 +185,7 @@ router.get('/:id', getBook);
 
 /**
  * @swagger
- * /api/books/{id}:
+ * /books/{id}:
  *   put:
  *     summary: Update a book
  *     tags: [Books]
@@ -268,7 +268,7 @@ router.put('/:id', bookUpdateValidationRules(), updateBook);
 
 /**
  * @swagger
- * /api/books/{id}:
+ * /books/{id}:
  *   delete:
  *     summary: Delete a book
  *     tags: [Books]

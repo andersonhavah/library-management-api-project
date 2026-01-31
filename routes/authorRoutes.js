@@ -14,7 +14,7 @@ const {
 
 /**
  * @swagger
- * /api/authors:
+ * /authors:
  *   get:
  *     summary: Get all authors
  *     tags: [Authors]
@@ -46,7 +46,7 @@ router.get('/', getAuthors);
 
 /**
  * @swagger
- * /api/authors:
+ * /authors:
  *   post:
  *     summary: Create a new author
  *     tags: [Authors]
@@ -118,7 +118,7 @@ router.post('/', authorValidationRules(), createAuthor);
 
 /**
  * @swagger
- * /api/authors/{id}:
+ * /authors/{id}:
  *   get:
  *     summary: Get a single author
  *     tags: [Authors]
@@ -166,7 +166,7 @@ router.get('/:id', getAuthor);
 
 /**
  * @swagger
- * /api/authors/{id}:
+ * /authors/{id}:
  *   put:
  *     summary: Update an author
  *     tags: [Authors]
@@ -238,7 +238,7 @@ router.put('/:id', authorUpdateValidationRules(), updateAuthor);
 
 /**
  * @swagger
- * /api/authors/{id}:
+ * /authors/{id}:
  *   delete:
  *     summary: Delete an author
  *     tags: [Authors]
