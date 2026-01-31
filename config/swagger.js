@@ -13,10 +13,10 @@ const options = {
       }
     },
     servers: [
-      {
-        url: 'http://localhost:3000',
-        description: 'Development server'
-      },
+    //   {
+    //     url: 'http://localhost:3000',
+    //     description: 'Development server'
+    //   },
       {
         url: 'https://library-management-api-project.onrender.com/',
         description: 'Production server'
