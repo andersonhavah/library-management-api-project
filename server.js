@@ -1,6 +1,9 @@
 const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
+const session = require('express-session');
+const passport = require('passport');
+const cookieParser = require('cookie-parser');
 const swaggerUi = require('swagger-ui-express');
 const swaggerSpecs = require('./config/swagger');
 const connectDB = require('./config/database');
@@ -11,19 +14,45 @@ dotenv.config();
 // Connect to database
 connectDB();
 
+// Passport config
+require('./config/passport')(passport);
+
 const app = express();
 
 // Body parser middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Enable CORS
-app.use(cors());
+// Cookie parser
+app.use(cookieParser());
+
+// Enable CORS with credentials
+app.use(cors({
+  origin: process.env.CLIENT_URL || 'http://localhost:3000',
+  credentials: true
+}));
+
+// Session middleware (must be before passport)
+app.use(session({
+  secret: process.env.SESSION_SECRET,
+  resave: false,
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 24 * 60 * 60 * 1000, // 24 hours
+    httpOnly: true,
+    secure: process.env.NODE_ENV === 'production' // Use secure cookies in production
+  }
+}));
+
+// Passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Swagger Documentation
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpecs));
 
 // Routes
+app.use('/auth', require('./routes/authRoutes'));
 app.use('/books', require('./routes/bookRoutes'));
 app.use('/authors', require('./routes/authorRoutes'));
 
@@ -45,6 +74,8 @@ app.use('/authors', require('./routes/authorRoutes'));
  *                   type: string
  *                 version:
  *                   type: string
+ *                 authentication:
+ *                   type: string
  *                 endpoints:
  *                   type: object
  *                 documentation:
@@ -54,11 +85,19 @@ app.get('/', (req, res) => {
   res.json({
     message: 'Welcome to Library Management API',
     version: '1.0.0',
+    authentication: 'OAuth 2.0 (Google) and Local Authentication',
     endpoints: {
+      auth: '/auth',
       books: '/books',
       authors: '/authors'
     },
-    documentation: '/api-docs'
+    documentation: '/api-docs',
+    authenticated: req.isAuthenticated(),
+    user: req.user ? {
+      id: req.user._id,
+      email: req.user.email,
+      role: req.user.role
+    } : null
   });
 });
 
@@ -80,7 +119,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, () => {
   console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
