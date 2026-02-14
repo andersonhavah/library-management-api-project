@@ -19,6 +19,8 @@ require('./config/passport')(passport);
 
 const app = express();
 
+app.set('trust proxy', 1);
+
 // Body parser middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -28,7 +30,7 @@ app.use(cookieParser());
 
 // Enable CORS with credentials
 app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:3000',
+  origin: ['https://library-management-api-project.onrender.com/', 'http://localhost:3000'],
   credentials: true
 }));
 
@@ -40,7 +42,8 @@ app.use(session({
   cookie: {
     maxAge: 24 * 60 * 60 * 1000, // 24 hours
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production' // Use secure cookies in production
+    secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
   }
 }));
 
