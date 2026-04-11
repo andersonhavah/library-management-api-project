@@ -163,7 +163,7 @@ Ensure you have the following installed on your system:
    GOOGLE_CALLBACK_URL=http://localhost:3000/auth/google/callback
 
    # CORS Configuration
-   CORS_ORIGIN=http://localhost:3000
+   CLIENT_URL=http://localhost:3000
    ```
 
 2. **Obtain Google OAuth Credentials** (optional for local development):
